@@ -3,9 +3,7 @@ package com.example.TicketService.Controller;
 import com.example.TicketService.Entity.Seat;
 import com.example.TicketService.Service.SeatService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -22,5 +20,15 @@ public class SeatController {
     @GetMapping("/getAllSeat")
     public List<Seat> getAllSeat() {
         return seatService.getAllSeat();
+    }
+
+    @GetMapping("/getSeat/{id}")
+    public Seat getSeat(@PathVariable("id") int id) {
+        return seatService.getSeat(id);
+    }
+
+    @PostMapping("/createSeat")
+    public Seat createSeat(@RequestBody Seat seat) {
+        return seatService.createSeat(seat);
     }
 }
