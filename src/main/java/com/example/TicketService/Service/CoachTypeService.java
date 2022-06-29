@@ -18,4 +18,12 @@ public class CoachTypeService {
     public List<CoachType> getAllCoachType() {
         return coachTypeRepository.findAll();
     }
+
+    public CoachType getCoachType(int id) {
+        return coachTypeRepository.findById(id).get();
+    }
+
+    public CoachType createCoachType(CoachType coachType) {
+        return coachTypeRepository.save(coachType);
+    }
 }
