@@ -31,11 +31,6 @@ public class CoachController {
     public Coach getCoach(@PathVariable("id") int id) {
         return coachService.getCoach(id);
     }
-    @GetMapping("/getCoachByTrainIdAndCoachId/{trainId}/{coachId}")
-    public Coach getCoachByTrainIdAndCoachId(@PathVariable("trainId") int trainId,@PathVariable("coachId") int coachId) {
-//        return coachService.getCoachByTrainIdAndCoachId(trainId,coachId);
-        return null;
-    }
     @PostMapping("/createCoach")
     public Coach createCoach(@RequestBody Coach coach) {
         Train train = trainService.getTrain(coach.getTrain().getTrainId());
