@@ -22,11 +22,11 @@ public class Passenger {
     @Column(nullable = false)
     private String reservationStatus;
 
-    @OneToOne(fetch = FetchType.LAZY,targetEntity = Seat.class,cascade = CascadeType.ALL)
+    @OneToOne(fetch = FetchType.EAGER,targetEntity = Seat.class,cascade = CascadeType.ALL)
     @JoinColumn(name = "seatId",referencedColumnName = "seatId",nullable = false)
     private Seat seat;
 
-    @OneToOne(fetch = FetchType.LAZY,targetEntity = User.class,cascade = CascadeType.ALL)
-    @JoinColumn(name = "userId",referencedColumnName = "userId",nullable = false)
+    @OneToOne(fetch = FetchType.EAGER,targetEntity = User.class,cascade = CascadeType.ALL)
+    @JoinColumn(name = "userId",referencedColumnName = "userId")
     private User user;
 }

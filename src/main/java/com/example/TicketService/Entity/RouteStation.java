@@ -2,9 +2,9 @@ package com.example.TicketService.Entity;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.*;
+
 import javax.persistence.*;
 import java.sql.Time;
-
 
 @Entity
 @Getter
@@ -13,33 +13,29 @@ import java.sql.Time;
 @RequiredArgsConstructor
 @AllArgsConstructor
 @Builder
-public class Train {
+public class RouteStation {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int trainId;
+    private int routeStationId;
 
     @Column(nullable = false)
-    private String trainName;
+    private String routeStationName;
 
-    @Column(nullable = false,unique = true)
-    private int trainNumber;
+    @Column(nullable = false)
+    private String routeStationOrder;
+
+    @Column(nullable = false)
+    private float fare;
 
     @Column(nullable = false)
     @JsonFormat(pattern = "HH:mm:ss")
-    private Time departureTime;
+    private Time time;
 
-    @Column(nullable = false)
-    @JsonFormat(pattern = "HH:mm:ss")
-    private Time arrivalTime;
-
-    @Column(nullable = false)
-    private int departureStationId;
-
-    @Column(nullable = false)
-    private int arrivalStationId;
-
-    @OneToOne(fetch = FetchType.EAGER,targetEntity = Route.class,cascade = CascadeType.ALL)
+    @ManyToOne(fetch = FetchType.EAGER,targetEntity = Route.class,cascade = CascadeType.ALL)
     @JoinColumn(name = "routeId",referencedColumnName = "routeId",nullable = false)
     private Route route;
 
+    @ManyToOne(fetch = FetchType.EAGER,targetEntity = Station.class,cascade = CascadeType.ALL)
+    @JoinColumn(name = "stationId",referencedColumnName = "stationId",nullable = false)
+    private Station station;
 }

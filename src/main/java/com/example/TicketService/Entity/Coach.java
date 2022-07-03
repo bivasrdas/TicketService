@@ -1,16 +1,17 @@
 package com.example.TicketService.Entity;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
+import org.hibernate.Hibernate;
 
 import javax.persistence.*;
+import java.util.Objects;
 
 @Entity
-@Data
+@Getter
+@Setter
+@ToString
+@RequiredArgsConstructor
 @AllArgsConstructor
-@NoArgsConstructor
 @Builder
 public class Coach {
     @Id
@@ -23,13 +24,11 @@ public class Coach {
     @Column(nullable = false)
     private String coachNumber;
 
-    @ManyToOne(fetch = FetchType.LAZY,targetEntity = Train.class,cascade = CascadeType.REMOVE)
-    @JoinColumn(name = "TrainId",referencedColumnName = "trainId",nullable = false)
+    @ManyToOne(fetch = FetchType.EAGER,targetEntity = Train.class,cascade = CascadeType.REMOVE)
+    @JoinColumn(name = "trainId",referencedColumnName = "trainId",nullable = false)
     private Train train;
 
-    @OneToOne(fetch = FetchType.LAZY,targetEntity = CoachType.class,cascade = CascadeType.REMOVE)
-    @JoinColumn(name = "CoachTypeId",referencedColumnName = "coachTypeId",nullable = false)
+    @OneToOne(fetch = FetchType.EAGER,targetEntity = CoachType.class,cascade = CascadeType.REMOVE)
+    @JoinColumn(name = "coachTypeId",referencedColumnName = "coachTypeId",nullable = false)
     private CoachType coachType;
-
-
 }
